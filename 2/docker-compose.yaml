@@ -1,0 +1,26 @@
+ersion: '3.8'
+
+services:
+  db:
+    image: postgres:13
+    container_name: concl_cert_task2_postgres_container
+    environment: # Opedeljajut pri inicializacii samoj bd
+      POSTGRES_USER: user  
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: employees_db
+    ports:
+      - "5434:5432"  #port zanjat => 5432 vneshinij->5434
+    #volumes:    #Inicializacija bd. v dannom sluchae vse v app
+    #  - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  app:
+    build: .
+    container_name: concl_cert_task_2_python_app
+    depends_on:
+      - db
+    environment:  # Pereopredeljajut to chto v dockerfile prioritet dlja app
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: employees_db
+      DB_USER: user
+      DB_PASSWORD: 
