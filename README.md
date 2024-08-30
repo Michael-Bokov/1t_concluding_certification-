@@ -25,6 +25,7 @@ Example:
 
 ![Uploading Screenshot from 2024-08-30 16-46-45.png…]()
 
+8)Задание 8. Развертывание Apache Airflow в Minikube и создание простого DAG
 
 9)Задание 9. Миграция данных из PostgreSQL в ClickHouse в Minikube
 
