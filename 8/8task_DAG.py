@@ -51,5 +51,5 @@ with DAG(
     end = DummyOperator(
         task_id='end'
     )
-
-    start >> [task1, task2, task3] >> process_task >> end
+    start >> [task1, task2] >> end
+    #start >> [task1, task2, task3] >> process_task >> end
