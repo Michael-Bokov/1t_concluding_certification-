@@ -1,0 +1,17 @@
+# Базовый образ
+FROM python:3.12-slim
+
+# Установка зависимостей
+COPY requirements.txt .
+#RUN apt-get update && apt-get install -y \
+#    procps \
+#    openjdk-11-jdk || apt-get install -y openjdk-17-jdk && \
+RUN   pip install --no-cache-dir -r requirements.txt
+#Environment java_home
+#ENV JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
+#ENV PATH="$JAVA_HOME/bin:$PATH"
+    
+COPY . /app
+WORKDIR /app
+
+CMD ["python3", "pyspark_script.py"]
