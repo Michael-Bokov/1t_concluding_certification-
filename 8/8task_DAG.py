@@ -49,7 +49,7 @@ with DAG(
         python_callable=process_data,
     )
 
-    # Финальный DummyOperator
+    # Фин
     end = DummyOperator(
         task_id='end'
     )
