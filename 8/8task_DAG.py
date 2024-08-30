@@ -1,7 +1,8 @@
 from airflow import DAG
 from airflow.operators.dummy import DummyOperator
+from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
 from airflow.utils.dates import days_ago
-from datetime import datetime
 
 default_args = {
     'owner': 'airflow',
@@ -48,7 +49,7 @@ with DAG(
         python_callable=process_data,
     )
 
-    # Фин
+    # Финальный DummyOperator
     end = DummyOperator(
         task_id='end'
     )
