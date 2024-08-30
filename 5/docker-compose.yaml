@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:13
+    container_name: concl_cert_task5_postgres_container
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: my_database
+    ports:
+      - "5435:5432"
+    volumes:
+      - ./create_tables_postgres.sql:/docker-entrypoint-initdb.d/create_tables_postgres.sql
+
+  clickhouse:
+    image: yandex/clickhouse-server:latest
+    container_name: concl_cert_task5_clickhouse_container
+    ports:
+      - "8124:8123" #smena porta 8123
+      - "9001:9000" #smena porta 9001
+    volumes:
+      - ./create_tables_clickhouse.sql:/docker-entrypoint-initdb.d/create_tables_clickhouse.sql
