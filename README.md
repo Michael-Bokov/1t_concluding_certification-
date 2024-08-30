@@ -41,6 +41,7 @@ michaelbokov/concluding_cert:task1
 Out: 
 
 ![Uploading Screenshot from 2024-08-30 16-46-45.png…]()
+![Uploading image.png…]()
 
 Результат задания — после выполнения задания у вас будет Docker-среда, в которой будет 2 базы данных. Используя PySpark, необходимо прочитать данные из обеих БД в рамках одного скрипта.
 
