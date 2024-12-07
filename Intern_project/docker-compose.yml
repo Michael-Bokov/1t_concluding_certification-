@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16
+    networks:
+      - fintech_network
+    environment:
+      POSTGRES_USER: fintech_admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: FinTech6_BTC
+    volumes:
+      - ./db_data:/var/lib/postgresql/data  # чтобы сохранять данные
+      - ./db_dumps:/docker-entrypoint-initdb.d #Дамп восстановления первичный базы
+    ports:
+      - "18224:5432"  # для подключения к базе с локальной машины
+
+  python_1m:
+    build:
+      context: ./1m  # директория Dockerfile инутного скрипта
+    environment:
+      DB_HOST: db
+      DB_USER: fintech_admin
+      DB_PASSWORD: admin
+      DB_NAME: FinTech6_BTC
+    depends_on:
+      - db
+    networks:
+      - fintech_network  
+
+  python_1h:
+    build:
+      context: ./1h
+    environment:
+      DB_HOST: db
+      DB_USER: fintech_admin
+      DB_PASSWORD: admin
+      DB_NAME: FinTech6_BTC
+    depends_on:
+      - db
+    networks:
+      - fintech_network
+  postgres_exporter:
+    image: prometheuscommunity/postgres-exporter:v0.16.0
+    environment:
+      DATA_SOURCE_NAME: "postgresql://fintech_admin:admin@db:5432/FinTech6_BTC?sslmode=disable"
+    networks:
+      - fintech_network
+    depends_on:
+      - db
+  db_backup:
+    image: prodrigestivill/postgres-backup-local
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_DB: FinTech6_BTC
+      POSTGRES_USER: fintech_admin
+      POSTGRES_PASSWORD: admin
+      SCHEDULE: "0 3 * * *"
+    volumes:
+      - ./backups:/backups
+    networks:
+      - fintech_network
+    depends_on:
+      - db 
+volumes:
+  db_data:
+networks:
+  fintech_network:
+    external: true
