@@ -109,7 +109,7 @@ def save_candlestick_data(df):
         logging.error(f"Error saving data: {str(e)}")
 def get_last_timestamp():
     try:
-        # Получаем последний временной штамп из базы данных
+        # Получаем последний временной stemp из базы данных
         last_candle = session.query(CandlestickData_f).order_by(CandlestickData_f.timestamp.desc()).first()
         if last_candle:
             return last_candle.timestamp
