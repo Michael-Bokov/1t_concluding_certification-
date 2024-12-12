@@ -20,8 +20,8 @@ pd.options.display.max_rows = None
 import warnings
 warnings.filterwarnings("ignore")
 
-api_key = '8FASHkqq4HlXPiUdaBlqLXXBrZc57Z4uDJJNVKzZz9CmC3ckVGceD30uxBXX8UGR'
-api_secret = 'ZbWBQ5VMogJaa0rriNahLWeff2PzXJW3fN53i14R3PTOghtXkN5EZ1uNDbB8x8jY'
+api_key = ''
+api_secret = ''
 
 PREDEFINED_PARAMS = {
      'changepoint_prior_scale': 0.4176933439369656, 
